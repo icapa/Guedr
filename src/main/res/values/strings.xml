@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Guedr</string>
+    <string name="imagen_de_piedra_offline">Imagen de piedra offline</string>
 </resources>
