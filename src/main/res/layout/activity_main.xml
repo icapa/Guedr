@@ -16,7 +16,13 @@
         android:layout_height="match_parent"
         android:src="@drawable/offline_weather"
         android:contentDescription="@string/imagen_de_piedra_offline"
-        android:scaleType="fitXY"
+        android:id="@+id/imageWeather"
+        />
+    <Button
+        android:id="@+id/button_change_system"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cambiar sistema"
 
         />
 </RelativeLayout>
