@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -8,21 +8,39 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.example.icapa.guedr.MainActivity">
 
-    
+
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:src="@drawable/offline_weather"
         android:contentDescription="@string/imagen_de_piedra_offline"
         android:id="@+id/imageWeather"
+        android:layout_weight="1"
+        android:scaleType="fitXY"
         />
-    <Button
-        android:id="@+id/button_change_system"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cambiar sistema"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:id="@+id/american_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/american_system" />
+
+        <Button
+            android:id="@+id/spanish_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/spanish_system" />
+
 
         />
-</RelativeLayout>
+    </LinearLayout>
+</LinearLayout>
