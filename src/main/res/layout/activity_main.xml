@@ -25,22 +25,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        >
-        <Button
-            android:id="@+id/american_button"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/american_system" />
-
-        <Button
-            android:id="@+id/spanish_button"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/spanish_system" />
+        ><![CDATA[
 
 
         />
+    ]]>
+
+        <ToggleButton
+            android:text="ToggleButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/change_weather_button"
+            android:layout_weight="1"
+            android:textOff="@string/spanish_system"
+            android:textOn="@string/american_system"
+            android:checked="true" />
     </LinearLayout>
+
 </LinearLayout>

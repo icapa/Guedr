@@ -9,12 +9,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ToggleButton;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getCanonicalName();
-    private Button change2SpanishButton;
-    private Button change2AmericanButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,25 +25,16 @@ public class MainActivity extends AppCompatActivity {
         // Crear el manejador
         //MainClickHandler mainClickHandler = new MainClickHandler(this);
         // Final es de solo lectura, para evitar que se modifique
+        final ToggleButton changeWeatherSystemButton = (ToggleButton) findViewById(R.id.change_weather_button);
 
 
-        change2SpanishButton =  (Button) findViewById(R.id.spanish_button);
-        //change2SpanishButton.setOnClickListener(mainClickHandler);
-        change2SpanishButton.setOnClickListener(new View.OnClickListener() {
+        changeWeatherSystemButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                changeWeatherSystem(false);
+                changeWeatherSystem(changeWeatherSystemButton.isChecked());
             }
         });
-        change2AmericanButton = (Button) findViewById(R.id.american_button);
-        //change2AmericanButton.setOnClickListener(mainClickHandler);
-        change2AmericanButton.setOnClickListener(new View.OnClickListener(){
 
-            @Override
-            public void onClick(View view) {
-                changeWeatherSystem(true);
-            }
-        });
     }
 
     /*
