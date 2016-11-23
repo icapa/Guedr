@@ -4,4 +4,7 @@
     <string name="american_system">SISTEMA AMERICANO</string>
     <string name="spanish_system">SISTEMA ESPAÑOL</string>
     <string name="togglebutton">ToggleButton</string>
+    <string name="unidades_farenheit">Unidades Fahrenheit</string>
+    <string name="unidades_celsius">Unidades Celsius</string>
+    <string name="selecciona_unidades">Selecciona unidades</string>
 </resources>
