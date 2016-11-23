@@ -3,4 +3,5 @@
     <string name="imagen_de_piedra_offline">Imagen de piedra offline</string>
     <string name="american_system">SISTEMA AMERICANO</string>
     <string name="spanish_system">SISTEMA ESPAÑOL</string>
+    <string name="togglebutton">ToggleButton</string>
 </resources>
