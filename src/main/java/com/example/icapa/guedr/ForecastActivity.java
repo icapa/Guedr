@@ -95,7 +95,7 @@ public class ForecastActivity extends AppCompatActivity {
             }
 
             // Lanzamos el Intent a Android
-            startActivity(intent);
+
             startActivityForResult(intent, REQUEST_UNITS);
 
             return true;
@@ -140,7 +140,7 @@ public class ForecastActivity extends AppCompatActivity {
                 setForecast(mForecast);
 
             } else if (resultCode == RESULT_CANCELED) {
-
+                Log.v(TAG,"Anulado");
             }
         }
     }
