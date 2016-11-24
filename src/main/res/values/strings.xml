@@ -7,8 +7,11 @@
     <string name="unidades_farenheit">Unidades Fahrenheit</string>
     <string name="unidades_celsius">Unidades Celsius</string>
     <string name="selecciona_unidades">Selecciona unidades</string>
-    <string name="max_temp_format">Temp. máxima: %.2f ºC</string>
-    <string name="min_temp_format">Temp. mínima: %.2f ºC</string>
+    <string name="max_temp_format" formatted="false">Temp. máxima: %.2f %s</string>
+    <string name="min_temp_format" formatted="false">Temp. mínima: %.2f %s</string>
     <string name="humidity_format">Humedad: %.2f %%</string>
     <string name="cloud_and_sun">Cloud and Sun</string>
+    <string name="settings">Ajustes</string>
+    <string name="units_fah">ºF</string>
+    <string name="units_celsius">ºC</string>
 </resources>

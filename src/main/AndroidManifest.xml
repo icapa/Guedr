@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:label="Principal" android:name=".ForecastActivity">
+        <activity android:label="Guedr" android:name=".ForecastActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:label="Ajustes"
+            android:label="@string/settings"
             android:name=".SettingsActivity"/>
     </application>
 
