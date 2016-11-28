@@ -1,8 +1,9 @@
-package com.example.icapa.guedr;
+package com.example.icapa.guedr.model;
 
 
+import java.io.Serializable;
 
-public class Forecast {
+public class Forecast implements Serializable{
     private float mMaxTemp;
     private float mMinTemp;
     private float mHumidity;

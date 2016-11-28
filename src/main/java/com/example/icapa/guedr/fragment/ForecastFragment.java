@@ -1,4 +1,4 @@
-package com.example.icapa.guedr;
+package com.example.icapa.guedr.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -18,6 +18,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.icapa.guedr.R;
+import com.example.icapa.guedr.activity.SettingsActivity;
+import com.example.icapa.guedr.model.City;
+import com.example.icapa.guedr.model.Forecast;
+
 /**
  * Created by icapa on 28/11/16.
  */
@@ -26,6 +31,7 @@ public class ForecastFragment extends Fragment {
     public static final String TAG = ForecastFragment.class.getCanonicalName();
     private static final int REQUEST_UNITS = 1;
     private static final String PREFERENCE_SHOW_CELSIUS = "showCelsius";
+    private static final String ARG_CITY = "city";
 
     private TextView mMaxTemp;
     private TextView mMinTemp;
@@ -33,14 +39,30 @@ public class ForecastFragment extends Fragment {
     private TextView mDescription;
     private ImageView mForecastImage;
 
+    private TextView mCityTextView;
+
     private boolean mShowCelsius;
     private Forecast mForecast;
 
+    private City mCity;
+
+    public static ForecastFragment newInstances(City city){
+        ForecastFragment forecastFragment = new ForecastFragment();
+        Bundle arguments = new Bundle();
+        arguments.putSerializable(ARG_CITY,city);
+        forecastFragment.setArguments(arguments);
+        return forecastFragment;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        if (getArguments() != null){
+            mCity = (City) getArguments().getSerializable(ARG_CITY);
+        }
+
+
     }
 
     @Nullable
@@ -55,21 +77,17 @@ public class ForecastFragment extends Fragment {
 
         mShowCelsius = prefs.getBoolean(PREFERENCE_SHOW_CELSIUS,true);
 
-
-
-
-        // Crear el modelo de pruebas
-        mForecast = new Forecast(30,15,25,"Algunas nubes tímidas",R.drawable.ico_02);
-
         // Accedo a las vistas de mi interfaz
         mMaxTemp = (TextView) root.findViewById(R.id.max_temp);
         mMinTemp= (TextView) root.findViewById(R.id.min_temp);
         mHumidity=(TextView) root.findViewById(R.id.humidity);
         mDescription = (TextView) root.findViewById(R.id.forecast_description);
         mForecastImage = (ImageView) root.findViewById(R.id.forecast_image);
+        mCityTextView = (TextView) root.findViewById(R.id.city);
 
+        mCityTextView.setText(mCity.getName());
         // Actualizo la interfaz del modelo
-        setForecast(mForecast);
+        setForecast(mCity.getForecast());
         return root;
 
     }
