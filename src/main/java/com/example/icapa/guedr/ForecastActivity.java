@@ -3,13 +3,16 @@ package com.example.icapa.guedr;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ForecastActivity extends AppCompatActivity {
 
@@ -115,6 +118,7 @@ public class ForecastActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_UNITS) {
+            final boolean oldShowCelsius = mShowCelsius;
 
             if (resultCode == RESULT_OK) {
                 int optionSelected = data.getIntExtra(SettingsActivity.EXTRA_UNITS, R.id.farenheit_rb);
@@ -138,6 +142,28 @@ public class ForecastActivity extends AppCompatActivity {
 
 
                 setForecast(mForecast);
+
+                if (mShowCelsius != oldShowCelsius) {
+                    // Indicamos al usuario que se han actualizado los ajustes
+                    //Toast.makeText(this, R.string.preferencias_actualizadas,Toast.LENGTH_LONG).show();
+                    Snackbar.make(findViewById(android.R.id.content), R.string.preferencias_actualizadas, Snackbar.LENGTH_LONG)
+                            .setAction(R.string.undo, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    mShowCelsius = oldShowCelsius;
+                                    PreferenceManager.getDefaultSharedPreferences(ForecastActivity.this)
+                                            .edit()
+                                            .putBoolean(PREFERENCE_SHOW_CELSIUS,mShowCelsius)
+                                            .apply();
+                                    setForecast(mForecast);
+
+                                }
+
+
+                            })
+                            .show();
+                }
+
 
             } else if (resultCode == RESULT_CANCELED) {
                 Log.v(TAG,"Anulado");
