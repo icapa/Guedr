@@ -8,12 +8,10 @@
    <include layout="@layout/toolbar_main" />
 
 
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:name="com.example.icapa.guedr.fragment.CitiPagerFragment"
+    <FrameLayout
         android:id="@+id/forecast_fragment"
-        tools:layout="@layout/fragment_citi_pager"/>
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"/>
 
 
 </LinearLayout>

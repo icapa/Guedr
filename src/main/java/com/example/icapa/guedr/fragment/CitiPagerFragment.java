@@ -7,7 +7,12 @@ import android.os.Bundle;
 
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -20,11 +25,19 @@ import com.example.icapa.guedr.model.City;
  */
 public class CitiPagerFragment extends Fragment {
 
+    private Cities mCities;
+    private ViewPager mPager;
 
     public CitiPagerFragment() {
         // Required empty public constructor
+        mCities = new Cities();
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,20 +46,75 @@ public class CitiPagerFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_citi_pager, container, false);
 
-        ViewPager pager = (ViewPager) root.findViewById(R.id.view_pager);
-        pager.setAdapter(new CityPagerAdapter(getFragmentManager()));
+        mPager = (ViewPager) root.findViewById(R.id.view_pager);
+        mPager.setAdapter(new CityPagerAdapter(getFragmentManager(),mCities));
 
+        mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                updateCityInfo(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        updateCityInfo(0);
         return root;
     }
 
+    private void updateCityInfo(int position) {
+        if (getActivity() instanceof AppCompatActivity){
+            AppCompatActivity activity = (AppCompatActivity) getActivity();
+            ActionBar actionBar = activity.getSupportActionBar();
+            if (actionBar != null){
+                actionBar.setTitle(mCities.getCity(position).getName());
+            }
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_pager,menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        boolean superValue = super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.previous) {
+            mPager.setCurrentItem(mPager.getCurrentItem()-1);
+            return true;
+        }
+        else if(item.getItemId() == R.id.next){
+            mPager.setCurrentItem(mPager.getCurrentItem()+1);
+            return true;
+        }
+        return superValue;
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        MenuItem menPrev = menu.findItem(R.id.previous);
+        MenuItem menNext = menu.findItem(R.id.next);
+        menPrev.setEnabled(mPager.getCurrentItem()>0);
+        menNext.setEnabled(mPager.getCurrentItem()< mCities.getCount()-1);
+    }
 }
 
 class CityPagerAdapter extends FragmentPagerAdapter {
 
     private Cities mCities;
 
-    public CityPagerAdapter(FragmentManager fm) {
+    public CityPagerAdapter(FragmentManager fm, Cities cities) {
         super(fm);
         mCities = new Cities();
     }
