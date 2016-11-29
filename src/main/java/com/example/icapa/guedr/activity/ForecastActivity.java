@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.example.icapa.guedr.R;
 import com.example.icapa.guedr.fragment.CitiPagerFragment;
+import com.example.icapa.guedr.fragment.CityListFragment;
 
 public class ForecastActivity extends AppCompatActivity {
 
@@ -18,6 +19,7 @@ public class ForecastActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forecast);
+
 
 
         // Accedemos a la toolbar
@@ -33,7 +35,7 @@ public class ForecastActivity extends AppCompatActivity {
         if (fm.findFragmentById(R.id.forecast_fragment)==null){
             // No existe, lo añadimos con una transacción a la jerarquía de vistas
             fm.beginTransaction()
-                    .add(R.id.forecast_fragment, new CitiPagerFragment())
+                    .add(R.id.forecast_fragment, new CityListFragment())
                     .commit();
 
         }
