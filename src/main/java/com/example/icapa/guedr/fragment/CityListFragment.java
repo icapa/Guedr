@@ -1,5 +1,6 @@
 package com.example.icapa.guedr.fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -56,10 +57,14 @@ public class CityListFragment extends Fragment {
         return root;
     }
 
-    @Override
-    public void onAttachFragment(Fragment childFragment) {
-        super.onAttachFragment(childFragment);
 
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (getActivity() instanceof OnCitySelectedListener){
+            mOnCitySelectedListener = (OnCitySelectedListener) getActivity();
+        }
     }
 
     @Override

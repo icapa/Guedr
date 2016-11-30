@@ -86,6 +86,10 @@ public class CitiPagerFragment extends Fragment {
         return root;
     }
 
+    public void showCity(int position){
+        mPager.setCurrentItem(position);
+    }
+
     private void updateCityInfo(int position) {
         if (getActivity() instanceof AppCompatActivity){
             AppCompatActivity activity = (AppCompatActivity) getActivity();
