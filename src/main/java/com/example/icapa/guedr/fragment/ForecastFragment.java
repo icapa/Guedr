@@ -23,6 +23,12 @@ import com.example.icapa.guedr.activity.SettingsActivity;
 import com.example.icapa.guedr.model.City;
 import com.example.icapa.guedr.model.Forecast;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 /**
  * Created by icapa on 28/11/16.
  */
@@ -92,24 +98,48 @@ public class ForecastFragment extends Fragment {
 
     }
     private void setForecast(Forecast forecast) {
-        float maxTemp = forecast.getMaxTemp();
-        float minTemp = forecast.getMinTemp();
-        String units = getString(R.string.units_celsius);
+
+        if (forecast == null){
+            downloadForecast();
+        }
+        else {
 
 
-        if (!mShowCelsius){
-            maxTemp = toFahrenheit(maxTemp);
-            minTemp = toFahrenheit(minTemp);
-            units = getString(R.string.units_fah);
+            float maxTemp = forecast.getMaxTemp();
+            float minTemp = forecast.getMinTemp();
+            String units = getString(R.string.units_celsius);
+
+
+            if (!mShowCelsius) {
+                maxTemp = toFahrenheit(maxTemp);
+                minTemp = toFahrenheit(minTemp);
+                units = getString(R.string.units_fah);
+            }
+
+            mMaxTemp.setText(String.format(getString(R.string.max_temp_format), maxTemp, units));
+            mMinTemp.setText(String.format(getString(R.string.min_temp_format), minTemp, units));
+            mHumidity.setText(String.format(getString(R.string.humidity_format), forecast.getHumidity()));
+            mDescription.setText(forecast.getDescription());
+            mForecastImage.setImageResource(forecast.getIcon());
+            mForecast = forecast;
         }
 
-        mMaxTemp.setText(String.format(getString(R.string.max_temp_format),maxTemp,units));
-        mMinTemp.setText(String.format(getString(R.string.min_temp_format),minTemp,units));
-        mHumidity.setText(String.format(getString(R.string.humidity_format),forecast.getHumidity()));
-        mDescription.setText(forecast.getDescription());
-        mForecastImage.setImageResource(forecast.getIcon());
+    }
 
+    private void downloadForecast() {
+        URL url = null;
+        InputStream input = null;
+        // Nos bajamos los datos
+        try {
+            url = new URL(String.format("hay que poner la url que sea %s",mCity.getName()));
+            HttpURLConnection  con = (HttpURLConnection) url.openConnection();
+            con.connect();
 
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private float toFahrenheit(float celsius) {
