@@ -25,8 +25,19 @@ import com.example.icapa.guedr.model.City;
  */
 public class CitiPagerFragment extends Fragment {
 
+    private static final String ARG_CITY_INDEX="ARG_CITY_INDEX";
+
     private Cities mCities;
     private ViewPager mPager;
+    private int mInitialCityIndex;
+
+    public static CitiPagerFragment newInstance(int cityIndex){
+        Bundle arguments = new Bundle();
+        arguments.putInt(ARG_CITY_INDEX,cityIndex);
+        CitiPagerFragment citiPagerFragment = new CitiPagerFragment();
+        citiPagerFragment.setArguments(arguments);
+        return citiPagerFragment;
+    }
 
     public CitiPagerFragment() {
         // Required empty public constructor
@@ -36,6 +47,9 @@ public class CitiPagerFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments()!=null){
+            mInitialCityIndex = getArguments().getInt(ARG_CITY_INDEX,0);
+        }
         setHasOptionsMenu(true);
     }
 
@@ -66,7 +80,9 @@ public class CitiPagerFragment extends Fragment {
             }
         });
 
-        updateCityInfo(0);
+        //updateCityInfo(mInitialCityIndex);
+        mPager.setCurrentItem(mInitialCityIndex);
+        updateCityInfo(mInitialCityIndex);
         return root;
     }
 
